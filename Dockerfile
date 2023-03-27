@@ -10,7 +10,7 @@ RUN test "$DB_ENGINE" != "django.db.backends.postgresql" && curl https://package
 RUN test "$DB_ENGINE" != "django.db.backends.postgresql" && apt-get update || :
 RUN test "$DB_ENGINE" != "django.db.backends.postgresql" && ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools || :
 
-RUN pip install --upgrade pip
+RUN pip install --default-timeout=1000 --upgrade pip
 RUN test "$DB_ENGINE" != "django.db.backends.postgresql" && pip install mssql-cli || :
 
 
@@ -20,12 +20,12 @@ COPY . /openimis-be
 WORKDIR /openimis-be
 ARG OPENIMIS_CONF_JSON
 ENV OPENIMIS_CONF_JSON=${OPENIMIS_CONF_JSON}
-RUN pip install -r requirements.txt
+RUN pip install --default-timeout=1000 -r requirements.txt
 RUN python modules-requirements.py openimis.json > modules-requirements.txt
-RUN pip install -r modules-requirements.txt
+RUN pip install --default-timeout=1000 -r modules-requirements.txt
 
 ARG SENTRY_DSN
-RUN test -z "$SENTRY_DSN" || pip install -r sentry-requirements.txt && :
+RUN test -z "$SENTRY_DSN" || pip install --default-timeout=1000 -r sentry-requirements.txt && :
 
 WORKDIR /openimis-be/openIMIS
 # For some reason, the zh_Hans (Simplified Chinese) of django-graphql-jwt fails to compile, excluding it
