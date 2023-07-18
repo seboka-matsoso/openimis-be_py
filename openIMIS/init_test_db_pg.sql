@@ -4047,7 +4047,6 @@ CREATE TABLE "public"."tblPremium" (
     "AuditUserID" integer NOT NULL,
     "PayerID" integer,
     "PolicyID" integer NOT NULL,
-    "RowID" "text",
     "CreatedDate" "date" DEFAULT CURRENT_DATE NOT NULL,
     "Source" character varying(50) NULL,
     "SourceVersion" character varying(15) NULL
