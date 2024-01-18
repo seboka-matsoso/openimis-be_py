@@ -1,6 +1,7 @@
 import os
 import json
 import sys
+import logging
 
 
 sys.path.insert(0, './openIMIS/openIMIS')
