@@ -3,10 +3,10 @@ version: "3.7"
 services:
   db:
     container_name: ${PROJECT_NAME:-openimis}-db
-    image: ghcr.io/openimis/openimis-pgsql:${DB_TAG:-develop}
+    image: ghcr.io/openimis/openimis-pgsql:23.10
     environment:
-      - POSTGRES_PASSWORD=IMISuser@1234
-      - POSTGRES_DB=test_imis
+      - POSTGRES_PASSWORD=IMISuserP@s
+      - POSTGRES_DB=IMIS
       - POSTGRES_USER=IMISuser
     healthcheck:
       test: ['CMD', 'pg_isready', '-U', "$DB_USER", '-d', "test_imis"]
